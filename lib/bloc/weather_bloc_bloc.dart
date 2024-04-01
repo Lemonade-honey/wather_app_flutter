@@ -16,13 +16,10 @@ class WeatherBlocBloc extends Bloc<WeatherBlocEvent, WeatherBlocState> {
       try {
         WeatherFactory wf = WeatherFactory(WEATHER_API_KEY, language: Language.INDONESIAN);
 
-        // geolocation
-        Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-
         // Cuaca Fetch
         Weather weather = await wf.currentWeatherByLocation(
-          position.latitude, 
-          position.longitude
+          event.position.latitude, 
+          event.position.longitude
         );
 
         emit(WeatherBlocSuccess(weather));
