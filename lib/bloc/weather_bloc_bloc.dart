@@ -14,14 +14,14 @@ class WeatherBlocBloc extends Bloc<WeatherBlocEvent, WeatherBlocState> {
       emit(WeatherBlocLoading());
 
       try {
-        WeatherFactory wf = WeatherFactory(WEATHER_API_KEY, language: Language.INDONESIAN);
+        WeatherFactory wf = WeatherFactory(WEATHER_API_KEY, language: Language.ENGLISH);
 
         // Cuaca Fetch
         Weather weather = await wf.currentWeatherByLocation(
           event.position.latitude, 
           event.position.longitude
         );
-
+        print(weather);
         emit(WeatherBlocSuccess(weather));
       } catch (e) {
         emit(WeatherBlocFailure());
